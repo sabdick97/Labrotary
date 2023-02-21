@@ -199,13 +199,6 @@ Ans:- update employee set JOB_TITLE='GRADE_A' where salary>5000;
 |         205 | Higgins   | AC_MGR    | 2300.00 |     NULL |    101 |            60 |           300.00 |
 |         206 | Gitz      | IT_PROG   | 5000.00 |     NULL |    103 |            60 |           300.00 |
 +-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
-
-
-
-
-
-
-
 18.Display the details of all those employees who are either CLERK or PROGRAMMER or ASSISTANT.
  Ans:- select * from employee where JOB_TITLE IN('SH_CLERK', 'IT_PROG','AD_ASST');
 +-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
