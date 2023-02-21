@@ -1,0 +1,239 @@
+3. Display last_name, job_id, employee_id for each employee with employee_id appearing first.
+Ans:- select  Employee_ID,Last_Name,JOB_TITLE from employee;
+
+
+
+
+Output:-
++-------------+-----------+-----------+
+| Employee_ID | Last_Name | JOB_TITLE |
++-------------+-----------+-----------+
+|         100 | King      | AD_ASST   |
+|         101 | Kochar    | SH_CLERK  |
+|         198 | Connell   | SH_CLERK  |
+|         199 | Grant     | SH_CLERK  |
+|         200 | Whalen    | AD_ASST   |
+|         201 | Hartstein | IT_PROG   |
+|         202 | Fay       | AC_MGR    |
+|         203 | Mavris    | AD_VP     |
+|         204 | Baer      | AD_PRES   |
+|         205 | Higgins   | AC_MGR    |
+|         206 | Gitz      | IT_PROG   |
++-------------+-----------+-----------+
+
+
+4. Display the details of all employees of department 60.
+Ans:-  select * from employee where DEPARTMENT_ID IN(60);
+Output:- +-------------+-----------+---------+---------+----------+--------+---------------+
+| Employee_ID | Last_Name | Job_ID  | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID |
++-------------+-----------+---------+---------+----------+--------+---------------+
+|         205 | Higgins   | AC_MGR  | 2300.00 |     NULL |    101 |            60 |
+|         206 | Gitz      | IT_PROG | 5000.00 |     NULL |    103 |            60 |
++-------------+-----------+---------+---------+----------+--------+---------------+
+
+5. Display the employee details of the employee who’s last_name is King.
+Ans:- select * from employee where LAST_NAME ='King';
+Output:- +-------------+-----------+---------+---------+----------+--------+---------------+
+| Employee_ID | Last_Name | Job_ID  | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID |
++-------------+-----------+---------+---------+----------+--------+---------------+
+|         100 | King      | AD_ASST | 8956.00 |     0.30 |    108 |           100 |
++-------------+-----------+---------+---------+----------+--------+---------------+
+
+6. Display unique job_id from EMPLOYEE table. Give alias name to the column as JOB_TITLE.
+Ans:- alter table employee rename column Job_ID to JOB_TITLE;
+Output:- +-------------+-----------+-----------+---------+----------+--------+---------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID |
++-------------+-----------+-----------+---------+----------+--------+---------------+
+|         100 | King      | AD_ASST   | 8956.00 |     0.30 |    108 |           100 |
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |
+7. Display last_name, salary and salary increase of Rs300. Give the new column name as ‘Increased Salary’.
+Ans:- alter table employee add increased_salary float(10,2);
+            update employee set  increased_salary=300;
+output:- select Last_Name,Salary,increased_salary from employee;
++-----------+---------+------------------+
+| Last_Name | Salary  | increased_salary |
++-----------+---------+------------------+
+| King      | 8956.00 |           300.00 |
+| Kochar    | 3400.00 |           300.00 |
+| Connell   | 2600.00 |           300.00 |
+| Grant     | 2600.00 |           300.00 |
+| Whalen    | 4400.00 |           300.00 |
+| Hartstein | 6000.00 |           300.00 |
+| Fay       | 6500.00 |           300.00 |
+| Mavris    | 7500.00 |           300.00 |
+| Baer      | 3500.00 |           300.00 |
+| Higgins   | 2300.00 |           300.00 |
+| Gitz      | 5000.00 |           300.00 |
++-----------+---------+------------------+
+8. Display last_name, salary and annual compensation of all employees, plus a onetime bonus of Rs 100. Give an alias name to the column displaying annual compensation.
+Ans:- select Last_Name,Salary,annual_compensation from employee;
++-----------+---------+---------------------+
+| Last_Name | Salary  | annual_compensation |
++-----------+---------+---------------------+
+| King      | 8956.00 |                 100 |
+| Kochar    | 3400.00 |                 100 |
+| Connell   | 2600.00 |                 100 |
+| Grant     | 2600.00 |                 100 |
+| Whalen    | 4400.00 |                 100 |
+| Hartstein | 6000.00 |                 100 |
+| Fay       | 6500.00 |                 100 |
+| Mavris    | 7500.00 |                 100 |
+| Baer      | 3500.00 |                 100 |
+| Higgins   | 2300.00 |                 100 |
+| Gitz      | 5000.00 |                 100 |
++-----------+---------+---------------------+
+9. Display the details of those employees who get commission.
+select * from employee where Comm_PCT is not NULL;
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         100 | King      | AD_ASST   | 8956.00 |     0.30 |    108 |           100 |           300.00 |
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |           300.00 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
+|         200 | Whalen    | AD_ASST   | 4400.00 |     1.30 |    101 |            10 |           300.00 |
+|         204 | Baer      | AD_PRES   | 3500.00 |     1.50 |    101 |            90 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+
+10.Display the details of those employees who do not get commission.
+Ans:- select * from employee where Comm_PCT is NULL;
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |
+|         202 | Fay       | AC_MGR    | 6500.00 |     NULL |    210 |            20 |           300.00 |
+|         203 | Mavris    | AD_VP     | 7500.00 |     NULL |    101 |            40 |           300.00 |
+|         205 | Higgins   | AC_MGR    | 2300.00 |     NULL |    101 |            60 |           300.00 |
+|         206 | Gitz      | IT_PROG   | 5000.00 |     NULL |    103 |            60 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+
+
+
+
+
+11.Display the Employee_id, Department_id and Salary all employees whose salary is greater than 5000.
+Ans:- select * from employee where Salary>5000;
+Output:- -+---------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary | annual_compensation |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+---------------------+
+|         100 | King      | AD_ASST   | 8956.00 |     0.30 |    108 |           100 |           300.00 |                 100 |
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |                 100 |
+|         202 | Fay       | AC_MGR    | 6500.00 |     NULL |    210 |            20 |           300.00 |                 100 |
+|         203 | Mavris    | AD_VP     | 7500.00 |     NULL |    101 |            40 |           300.00 |                 100 |
++-------------+-----------+-----------+---------+----------+--------+---------------+--
+12.Display the Last_Name and Salary of all employees whose salary is between 4000 and 7000.
+Ans:- select * from employee where Salary>4000 and Salary<7000;
+Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary | annual_compensation |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+---------------------+
+|         200 | Whalen    | AD_ASST   | 4400.00 |     1.30 |    101 |            10 |           300.00 |                 100 |
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |                 100 |
+|         202 | Fay       | AC_MGR    | 6500.00 |     NULL |    210 |            20 |           300.00 |                 100 |
+|         206 | Gitz      | IT_PROG   | 5000.00 |     NULL |    103 |            60 |           300.00 |                 100 |
++-------------+-----------+-----------+---------+----------+--------+---------
+
+13.Display the details of all employees whose salary is either 6000 or 6500 or 7000.
+Ans:- select * from employee where Salary IN(6000,6500,7000);
+output:- | Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |
+|         202 | Fay       | AC_MGR    | 6500.00 |     NULL |    210 |            20 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+14.Display the details of all those employees who work either in department 10 or 20 or 30 or 50.
+ANS:-select * from employee where DEPARTMENT_ID IN(10,20,30,50);
+Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |           300.00 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
+|         200 | Whalen    | AD_ASST   | 4400.00 |     1.30 |    101 |            10 |           300.00 |
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |
+|         202 | Fay       | AC_MGR    | 6500.00 |     NULL |    210 |            20 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+15.Display the details of all employees whose salary is not equal to 5000
+Ans:- select * from employee where Salary!=5000;
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         100 | King      | AD_ASST   | 8956.00 |     0.30 |    108 |           100 |           300.00 |
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |           300.00 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
+|         200 | Whalen    | AD_ASST   | 4400.00 |     1.30 |    101 |            10 |           300.00 |
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |
+|         202 | Fay       | AC_MGR    | 6500.00 |     NULL |    210 |            20 |           300.00 |
+|         203 | Mavris    | AD_VP     | 7500.00 |     NULL |    101 |            40 |           300.00 |
+|         204 | Baer      | AD_PRES   | 3500.00 |     1.50 |    101 |            90 |           300.00 |
+|         205 | Higgins   | AC_MGR    | 2300.00 |     NULL |    101 |            60 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------
+
+16.Display the details of all the CLERKS working in the organization.
+Ans:-select * from employee where JOB_TITLE like "%K";
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |           300.00 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+17.Update the job_id’s of the employees who earn more than 5000 to Grade_A. Display the table EMPLOYEE after updating.
+Ans:- update employee set JOB_TITLE='GRADE_A' where salary>5000;
+         select * from employee;
+-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         100 | King      | GRADE_A   | 8956.00 |     0.30 |    108 |           100 |           300.00 |
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |           300.00 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
+|         200 | Whalen    | AD_ASST   | 4400.00 |     1.30 |    101 |            10 |           300.00 |
+|         201 | Hartstein | GRADE_A   | 6000.00 |     NULL |    100 |            20 |           300.00 |
+|         202 | Fay       | GRADE_A   | 6500.00 |     NULL |    210 |            20 |           300.00 |
+|         203 | Mavris    | GRADE_A   | 7500.00 |     NULL |    101 |            40 |           300.00 |
+|         204 | Baer      | AD_PRES   | 3500.00 |     1.50 |    101 |            90 |           300.00 |
+|         205 | Higgins   | AC_MGR    | 2300.00 |     NULL |    101 |            60 |           300.00 |
+|         206 | Gitz      | IT_PROG   | 5000.00 |     NULL |    103 |            60 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+
+
+
+
+
+
+18.Display the details of all those employees who are either CLERK or PROGRAMMER or ASSISTANT.
+ Ans:- select * from employee where JOB_TITLE IN('SH_CLERK', 'IT_PROG','AD_ASST');
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+| Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         100 | King      | AD_ASST   | 8956.00 |     0.30 |    108 |           100 |           300.00 |
+|         101 | Kochar    | SH_CLERK  | 3400.00 |     1.30 |    118 |            30 |           300.00 |
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
+|         200 | Whalen    | AD_ASST   | 4400.00 |     1.30 |    101 |            10 |           300.00 |
+|         201 | Hartstein | IT_PROG   | 6000.00 |     NULL |    100 |            20 |           300.00 |
+|         206 | Gitz      | IT_PROG   | 5000.00 |     NULL |    103 |            60 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+19.Display those employees from the EMPLOYEE table whose designation is CLERK and salary is less than 3000. 
+Ans:- select * from employee where JOB_TITLE='SH_CLERK' and Salary<3000;
+Employee_ID | Last_Name | JOB_TITLE | Salary  | Comm_PCT | MGR_ID | DEPARTMENT_ID | increased_salary |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+|         198 | Connell   | SH_CLERK  | 2600.00 |     2.50 |    124 |            50 |           300.00 |
+|         199 | Grant     | SH_CLERK  | 2600.00 |     2.20 |    124 |            50 |           300.00 |
++-------------+-----------+-----------+---------+----------+--------+---------------+------------------+
+
+20.Display those employees Last_Name, Mgr_id from the EMPLOYEE table whose salary is above 3000 and work under Manager 101.
+Ans:- select Last_Name,MGR_ID from employee where Salary>3000 and MGR_ID=101;
+| Last_Name | MGR_ID |
++-----------+--------+
+| Whalen    |    101 |
+| Mavris    |    101 |
+| Baer      |    101 |
++-----------+--------+
+
