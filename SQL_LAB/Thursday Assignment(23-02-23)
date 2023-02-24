@@ -1,0 +1,105 @@
+create database anudip;
+ use anudip;
+ create table Students(reg_No int primary key,name varchar(25)not null,branch varchar(25) not null,contact int,DOB date not null, joining date not null,address varchar(50) not null, email_id varchar(50) not null);
+ desc students;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| reg_No   | int         | NO   | PRI | NULL    |       |
+| name     | varchar(25) | NO   |     | NULL    |       |
+| branch   | varchar(25) | NO   |     | NULL    |       |
+| contact  | int         | YES  |     | NULL    |       |
+| DOB      | date        | NO   |     | NULL    |       |
+| joining  | date        | NO   |     | NULL    |       |
+| address  | varchar(50) | NO   |     | NULL    |       |
+| email_id | varchar(50) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+ insert into students values(2244,'SABDICK','BCA',6789012,'1997-08-02','2022-11-15','Konnagar','sabdick97@gmail.com');insert into students values(2255,'ARINDAM','MCA',6709012,'1999-09-22','2022-11-19','Barasat','arindam07@gmail.com'),(2266,'ROHAN','B.TECH',6780123,'2000-12-25','2022-11-22','Kalimpong','rohanroy@gmail.com'); insert into students values(2277,'GOUTAM','MBA',6745712,'1995-09-02','2022-11-09','Puruliya','gautam89@gmail.com'),(2288,'JOHN','B.SC',6778123,'2001-02-25','2022-11-30','Srerampore','jonnyy@gmail.com');
+select * from students;
++--------+---------+--------+---------+------------+------------+------------+---------------------+
+| reg_No | name    | branch | contact | DOB        | joining    | address    | email_id            |
++--------+---------+--------+---------+------------+------------+------------+---------------------+
+|   2244 | SABDICK | BCA    | 6789012 | 1997-08-02 | 2022-11-15 | Konnagar   | sabdick97@gmail.com |
+|   2255 | ARINDAM | MCA    | 6709012 | 1999-09-22 | 2022-11-19 | Barasat    | arindam07@gmail.com |
+|   2266 | ROHAN   | B.TECH | 6780123 | 2000-12-25 | 2022-11-22 | Kalimpong  | rohanroy@gmail.com  |
+|   2277 | GOUTAM  | MBA    | 6745712 | 1995-09-02 | 2022-11-09 | Puruliya   | gautam89@gmail.com  |
+|   2288 | JOHN    | B.SC   | 6778123 | 2001-02-25 | 2022-11-30 | Srerampore | jonnyy@gmail.com    |
++--------+---------+--------+----
+
+ create table subject(Subject_code int  primary key,sub1 int,sub2 int, sub3 int,semester varchar(10), reg_No int,Foreign key(reg_No) references students(reg_No));
+desc subject;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Subject_code | int         | NO   | PRI | NULL    |       |
+| sub1         | int         | YES  |     | NULL    |       |
+| sub2         | int         | YES  |     | NULL    |       |
+| sub3         | int         | YES  |     | NULL    |       |
+| semester     | varchar(10) | YES  |     | NULL    |       |
+| reg_No       | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+display a students information after updating his/her details.
+Ans:- update students set joining ='2022-07-12',email_id='rohanroy222@outlook.com' where reg_No=2266;
+select * from students;
++--------+---------+--------+---------+------------+------------+--------------+-------------------------+
+| reg_No | name    | branch | contact | DOB        | joining    | address      | email_id                |
++--------+---------+--------+---------+------------+------------+--------------+-------------------------+
+|   2244 | SABDICK | BCA    | 6789012 | 1997-08-02 | 2022-11-15 | Konnagar     | sabdick97@gmail.com     |
+|   2255 | ARINDAM | MCA    | 6709012 | 1999-09-22 | 2022-11-19 | Barasat      | arindam07@gmail.com     |
+|   2266 | ROHAN   | B.TECH | 6780123 | 2000-12-25 | 2022-07-12 | Kalimpong    | rohanroy222@outlook.com |
+|   2277 | GOUTAM  | MBA    | 6745712 | 1995-09-02 | 2022-11-09 | Puruliya     | gautam89@gmail.com      |
+|   2288 | JOHN    | B.SC   | 6778123 | 2001-02-25 | 2022-11-30 | Srerampore   | jonnyy@gmail.com        |
+|   2299 | NITISH  | BCA    | 6789123 | 1993-07-12 | 2022-11-01 | Krishnanagar | nitishrana@outlook.com  |
+|   3001 | SAYAN   | BCA    |  679123 | 1995-12-01 | 2022-10-10 | Rishara      | sayan@outlook.com       |
++--------+---------+--------+---------+------------+------------+--------------+-------------------------+
+
+display the average marks of all the students:-
+Ans:- select s.Subject_code,p.reg_No,p.name,s.sub1,s.sub2,s.sub3,((sub1+sub2+sub3)/3)as Average_Marks from students p inner join subject s on s.reg_No=p.reg_No;
+--------------+--------+---------+------+------+------+---------------+
+| Subject_code | reg_No | name    | sub1 | sub2 | sub3 | Average_Marks |
++--------------+--------+---------+------+------+------+---------------+
+|          100 |   2244 | SABDICK |   80 |   86 |   79 |       81.6667 |
+|          110 |   2255 | ARINDAM |   70 |   86 |   98 |       84.6667 |
+|          120 |   2266 | ROHAN   |   79 |   88 |   99 |       88.6667 |
+|          130 |   2277 | GOUTAM  |   98 |   99 |   71 |       89.3333 |
+|          140 |   2288 | JOHN    |   61 |   56 |   99 |       72.0000 |
+|          121 |   2299 | NITISH  |   57 |   60 |   90 |       69.0000 |
+|          122 |   3001 | SAYAN   |   80 |   90 |   56 |       75.3333 |
++--------------+--------+---------+------+------+------+---------------+
+
+display the sum of marks of students where semester = 3
+ANS:- select (sub1+sub2+sub3)as Marks_Sum,semester from subject where semester=3;
+
+-----------+----------+
+| Marks_Sum | semester |
++-----------+----------+
+|       266 | 3rd      |
+|       207 | 3rd      |
+|       226 | 3rd      |
+
+display the reg_no,student name, marks whose sum of marks is greater than 250.
+Ans:- select s.Subject_code,p.reg_No,p.name,(sub1+sub2+sub3) as Marks_Sum from students p inner join subject s on s.reg_No=p.reg_No where (s.sub1+s.sub2+s.sub3)>250;
++--------------+--------+---------+-----------+
+| Subject_code | reg_No | name    | Marks_Sum |
++--------------+--------+---------+-----------+
+|          110 |   2255 | ARINDAM |       254 |
+|          120 |   2266 | ROHAN   |       266 |
+|          130 |   2277 | GOUTAM  |       268 |
++--------------+--------+---------+-----------+
+
+calculate the percentage for the marks for all the students. Display the reg_no, student_name, branch, semester and percentage.
+Ans:- 
+select s.Subject_code,p.reg_No,p.name,s.sub1,s.sub2,s.sub3,((sub1+sub2+sub3)/3) as Average_Marks,(((sub1+sub2+sub3)/3)*100/100) as Percentage_Marks from students p inner join subject s on s.reg_No=p.reg_No;
+--------------+--------+---------+------+------+------+---------------+------------------+
+| Subject_code | reg_No | name    | sub1 | sub2 | sub3 | Average_Marks | Percentage_Marks |
++--------------+--------+---------+------+------+------+---------------+------------------+
+|          100 |   2244 | SABDICK |   80 |   86 |   79 |       81.6667 |      81.66666667 |
+|          110 |   2255 | ARINDAM |   70 |   86 |   98 |       84.6667 |      84.66666667 |
+|          120 |   2266 | ROHAN   |   79 |   88 |   99 |       88.6667 |      88.66666667 |
+|          130 |   2277 | GOUTAM  |   98 |   99 |   71 |       89.3333 |      89.33333333 |
+|          140 |   2288 | JOHN    |   61 |   56 |   99 |       72.0000 |      72.00000000 |
+|          121 |   2299 | NITISH  |   57 |   60 |   90 |       69.0000 |      69.00000000 |
+|          122 |   3001 | SAYAN   |   80 |   90 |   56 |       75.3333 |      75.33333333 |
++--------------+--------+---------+------+------+------+---------------+------------------+
+
