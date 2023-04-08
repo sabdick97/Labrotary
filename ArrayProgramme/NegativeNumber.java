@@ -27,7 +27,7 @@ public class NegativeNumber {
 		for (int i=0; i<s;i++)
 		{
 			if (a[i]<0)
-		
+		}
 		{
 		System.out.print( a[i]+  "  ") ;
 	}
